@@ -5,8 +5,8 @@ const {FileSystemWallet, Gateway, X509WalletMixin} = require('fabric-network');
 const path = require('path');
 const databaseHandler = require("./accessDocumentDatabase");
 
-const ccpPath = path.resolve(__dirname, '..', '..', '..', 'Blockchain-Network', 'first-network', 'connection-org1.json');
-const walletPath = path.join(process.cwd(), '../wallet');
+const ccpPath = path.resolve(__dirname, '..', '..', 'fabric-samples','test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+const walletPath = path.join(process.cwd(), './wallet');
 const wallet = new FileSystemWallet(walletPath);
 
 router.post('/', async (req, res) => {
@@ -50,8 +50,6 @@ router.post('/', async (req, res) => {
         }, adminIdentity);
         const enrollment = await ca.enroll({enrollmentID: req.body.registrationId, enrollmentSecret: secret});
 
-        // console.log(JSON.parse(enrollment.toString()));
-
         const userIdentity = X509WalletMixin.createIdentity('Org1MSP', enrollment.certificate, enrollment.key.toBytes());
 
         await wallet.import(req.body.registrationId, userIdentity);
@@ -60,7 +58,6 @@ router.post('/', async (req, res) => {
 
         let response = await registerInLedger(req);
 
-        // console.log(response.length + " hey");
         let registeredUser = await databaseHandler.registerNewUser(req.body.registrationId, req.body.name, 'Hospital');
         res.send("Correct");
 
@@ -74,7 +71,7 @@ router.post('/', async (req, res) => {
 async function registerInLedger(req) {
 
     try {
-        const walletPath = path.join(process.cwd(), '../wallet');
+        const walletPath = path.join(process.cwd(), './wallet');
         const wallet = new FileSystemWallet(walletPath);
 
         // Create a new gateway for connecting to our peer node.

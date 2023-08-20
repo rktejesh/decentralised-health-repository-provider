@@ -74,7 +74,7 @@ router.post('/', async (req, res) => {
 async function registerInLedger(req) {
 
     try {
-        const walletPath = path.join(process.cwd(), '../wallet');
+        const walletPath = path.join(process.cwd(), './wallet');
         const wallet = new FileSystemWallet(walletPath);
 
         // Create a new gateway for connecting to our peer node.

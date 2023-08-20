@@ -6,24 +6,22 @@ const path = require('path');
 var handler = require('./sessionKeyHandler');
 var databaseHandler = require('./accessDocumentDatabase');
 
-const ccpPath = path.resolve(__dirname, '..', '..', '..', 'Blockchain-Network', 'first-network', 'connection-org1.json');
-
+const ccpPath = path.resolve(__dirname, '..', '..', 'fabric-samples','test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
 
 router.post('/', async (req, res) => {
     console.log('**********Read Documents**************');
     try {
         // console.log("hospitalId"in req.body);
-        let sessionKeyExists =false;
+        let sessionKeyExists=false;
         if(req.body['express']){
         sessionKeyExists = await handler.verifySessionKey(req.body.hospitalId, req.body.sessionKey);
-
         }else{
         sessionKeyExists = await handler.verifySessionKey(req.body.patientId, req.body.sessionKey);
         }
         if (!sessionKeyExists) {
             res.send("Incorrect");
         } else {
-            const walletPath = path.join(process.cwd(), '../wallet');
+            const walletPath = path.join(process.cwd(), './wallet');
             const wallet = new FileSystemWallet(walletPath);
             // Create a new gateway for connecting to our peer node.
             const gateway = new Gateway();
@@ -42,7 +40,6 @@ router.post('/', async (req, res) => {
             if(req.body['express']){
             let documentStorageId = await databaseHandler.EmergencyAccess(req.body.hospitalId,req.body.patientId);
             // console.log(documentStorageId);
-
             }
 
             /*

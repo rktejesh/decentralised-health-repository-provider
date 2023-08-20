@@ -49,17 +49,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-// checked
-
 app.use('/', indexRouter);
 app.use('/registerPatient', registerPatient);
 app.use('/registerDoctor', registerDoctor);
 app.use('/verifyPassword', verifyPassword);
 app.use('/registerLaboratory', registerLaboratory);
+app.use('/registerHospital', registerHospital);
+app.use('/registerInsurer', registerInsurer);
+app.use('/registerPharmacy', registerPharmacy);
+app.use('/registerResearcher', registerResearcher);
+app.use('/assignDoctor', assignDoctor);
+
+app.use('/readPatientDocuments', readPatientDocuments);
 
 // not checked
 app.use('/addEmergencyContact', addEmergencyContact);
-app.use('/assignDoctor', assignDoctor);
 app.use('/createAppointment', createAppointment);
 app.use('/deleteAsset', deleteAsset);
 app.use('/fetchFileFromDatabase', fetchFileFromDatabase);
@@ -74,11 +78,6 @@ app.use('/grantDirectAccess', grantDirectAccess);
 app.use('/logOut', logOut);
 app.use('/readAsset', readAsset);
 app.use('/readIndividualAsset', readIndividualAsset);
-app.use('/readPatientDocuments', readPatientDocuments);
-app.use('/registerHospital', registerHospital);
-app.use('/registerInsurer', registerInsurer);
-app.use('/registerPharmacy', registerPharmacy);
-app.use('/registerResearcher', registerResearcher);
 app.use('/removeEmergencyContact', removeEmergencyContact);
 app.use('/requestAccess', requestAccess);
 app.use('/revokeAccess', revokeAccess);
