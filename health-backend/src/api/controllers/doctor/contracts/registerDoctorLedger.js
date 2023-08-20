@@ -60,12 +60,12 @@ export default async (req, res) => {
 
         // console.log(response.length + " hey");
         // res.send(registeredUser.ops);
-        return;
+        // return;
 
     } catch (error) {
         await wallet.delete(req.body.medicalRegistrationNo);
         console.error(`Failed to register user ${req.body.medicalRegistrationNo}: ${error}`);
-        res.send("Failed to register candidate");
+        // res.send("Failed to register candidate");
         throw error;
     }
 };

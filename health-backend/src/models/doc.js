@@ -18,7 +18,22 @@ const docSchema = new Schema(
         filepath: {
             type: String,
             required: true
-        }
+        },
+        hospital: {
+            type: String,
+        },
+        doctor: {
+            type: String
+        },
+        date: {
+            type: String
+        },
+        requestAccess: {
+            type: Boolean
+        },
+        grantAccess: {
+            type: Boolean
+        },
     },
     {
         timestamps: true,

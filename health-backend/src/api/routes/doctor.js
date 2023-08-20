@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register } from '../controllers/doctor/index.js';
+import { requestAccess, register, profile } from '../controllers/doctor/index.js';
 import { auth, imageUpload } from '../middlewares/index.js';
 import temp from '../controllers/user/register-user-ledger-old.js'
 import multer from 'multer';
@@ -16,7 +16,9 @@ router.post('/register', register);
 // router.post('/refresh-token', refreshToken);
 // // router.post('/forgot-password', auth, forgotPassword);
 // router.post('/send-verification-code', sendVerificationCode);
-// router.get('/profile', auth, profile);
+router.get('/profile', auth, profile);
+router.post('/request-access', requestAccess)
+
 // router.post('/createEHR', upload.single('files'), auth, createEHR);
 
 // EDIT

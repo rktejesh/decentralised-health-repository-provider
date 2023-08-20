@@ -77,9 +77,9 @@ export default async (req, res) => {
   const geo = lookup(ipHelper(req));
 
   let doctorRecord = new DoctorRecord({
-    eth_id: user.eth_id, 
+    eth_id: req.body.eth_id, 
     email: req.body.email,
-    name: name,
+    name: req.body.name,
     mobile: req.body.mobile,
     hospitalId: req.body.hospitalId,
     medicalRegistrationNo: req.body.medicalRegistrationNo,
@@ -112,7 +112,6 @@ export default async (req, res) => {
     return res.status(500).json(errorHelper("00057", req, err.message));
   });
 
-  logger("00035", userRecord._id, getText("en", "00035"), "Info", req);
   return res.status(200).json({
     resultMessage: { en: getText("en", "00035"), tr: getText("tr", "00035") },
     resultCode: "00035",

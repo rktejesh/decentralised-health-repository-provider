@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register } from '../controllers/hospital/index.js';
+import { register, getDocuments } from '../controllers/hospital/index.js';
 import { auth, imageUpload } from '../middlewares/index.js';
 import temp from '../controllers/user/register-user-ledger-old.js'
 import multer from 'multer';
@@ -11,6 +11,7 @@ const router = Router();
 
 // router.post('/verify-mobile', verifyMobile);
 router.post('/register', register);
+router.get('/get-docs', getDocuments);
 // router.post('/logout', auth, logout);
 // // router.post('/verify-email', verifyEmail);
 // router.post('/refresh-token', refreshToken);
