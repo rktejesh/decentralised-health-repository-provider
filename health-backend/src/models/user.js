@@ -29,6 +29,10 @@ const userSchema = new Schema(
     createdByIp: {
       type: String,
     },
+    type: {
+      type: String,
+      default: "Patient"
+    }
   },
   {
     timestamps: true,

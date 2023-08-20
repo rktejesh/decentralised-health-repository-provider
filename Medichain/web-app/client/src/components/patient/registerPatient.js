@@ -18,7 +18,7 @@ import SpinnerDialog from "../genericFiles/SpinnerDialog";
 
 
 const theme = createTheme();
-
+ 
 const avatar = {
   margin: theme.spacing(1),
   backgroundColor: theme.palette.secondary.main,

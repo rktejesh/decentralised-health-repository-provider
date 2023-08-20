@@ -66,9 +66,7 @@ async function main() {
         response = await contract.evaluateTransaction('getModifiedAsset', JSON.stringify(asset));
 
         console.log(JSON.parse(response.toString()));
-        gateway.disconnect();
-        //
-    
+        gateway.disconnect();    
 
     } catch (error) {
         console.error(`Failed to fetch data ${error}`);

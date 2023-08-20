@@ -28,6 +28,9 @@ const userRecordSchema = new Schema(
     countryCode: {
       type: String,
     },
+    mobile: {
+      type: String,
+    },
     timezone: {
       type: Number,
     },

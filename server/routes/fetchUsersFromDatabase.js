@@ -6,7 +6,6 @@ const databaseHandler = require('./accessDocumentDatabase');
 
 
 router.post('/', async (req, res) => {
-
     try {
         let response;
         if (req.body.query === 'list') {

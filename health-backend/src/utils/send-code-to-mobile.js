@@ -34,13 +34,13 @@ export async function sendOtp(req, res) {
           );
           return resolve(verification_check);
         });
-        // .catch((error)=>{
-        //   console.log("chi po");
-        //   logger("00049", req, getText("en", "00049"), error, error);
-        //   return reject(error);
-        // });
+      // .catch((error)=>{
+      //   console.log("chi po");
+      //   logger("00049", req, getText("en", "00049"), error, error);
+      //   return reject(error);
+      // });
     } catch (e) {
-      logger("00049", "", getText("en", "00049"),e,"",req);
+      logger("00049", "", getText("en", "00049"), e, "", req);
       return reject(e);
     }
   });
@@ -73,7 +73,7 @@ export async function verifyOtp(mobile, code) {
 
   new Promise(async (resolve, reject) => {
     let verificationRequest;
-    console.log(mobile+code);
+    console.log(mobile + code);
     try {
       console.log("yes");
       let verificationResult;
@@ -92,12 +92,12 @@ export async function verifyOtp(mobile, code) {
           verificationResult = verification_check;
           console.log("cdcs");
         });
-        return resolve("verificationResult.status");
+      return resolve("verificationResult.status");
 
       // errors.verificationCode = `Unable to verify code. status: ${verificationResult.status}`;
     } catch (e) {
       console.log(e);
-      logger("00049", "", getText("en", "00049"),e, verificationRequest,mobile);
+      logger("00049", "", getText("en", "00049"), e, verificationRequest, mobile);
       return reject(e);
     }
   });

@@ -18,12 +18,12 @@ export default async (req, res, next) => {
     if (!Types.ObjectId.isValid(req.user._id))
       return res.status(400).json(errorHelper('00007', req));
 
-    const exists = await User.exists({ _id: req.user._id})
+    const user = await User.findOne({ _id: req.user._id})
       .catch((err) => {
         return res.status(500).json(errorHelper('00008', req, err.message));
       });
 
-    if (!exists) return res.status(400).json(errorHelper('00009', req));
+    if (!user) return res.status(400).json(errorHelper('00009', req));
 
     const tokenExists = await Token.exists({ userId: req.user._id, status: true })
       .catch((err) => {
@@ -31,7 +31,8 @@ export default async (req, res, next) => {
       });
 
     if (!tokenExists) return res.status(401).json(errorHelper('00011', req));
-
+    
+    req.user = user;
     next();
   } catch (err) {
     return res.status(401).json(errorHelper('00012', req, err.message));

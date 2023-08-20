@@ -1,0 +1,58 @@
+class Solution {
+public:
+    vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
+        vector<int> temp = positions;
+        unordered_map<int, int> healthMap;
+        int n = positions.size();
+        for(int i = 0; i < n; i++) {
+            healthMap[positions[i]] = health[i];
+        }
+        for(int i = 0; i < n; i++) {
+            if(dir[i] == 'L')
+            healthMap[positions[i]] *= -1;
+        }
+        
+        sort(positions.begin(), positions.end());
+        stack<int> st;
+        int i = 0, n = positions.size();
+        while(i < n) {
+            if(!st.empty()) {
+                if(abs(healthMap[st.top()]) + abs(healthMap[positions[i]]) == abs(healthMap[st.top()]+healthMap[positions[i]])) {
+                    st.push(positions[i]);
+                } else {
+                    if(healthMap[st.top()] < 0) {
+                        st.push(positions[i]);
+                    } else {
+                        if(healthMap[st.top()] == healthMap[positions[i]]) {
+                            st.pop();
+                        } else if (healthMap[st.top()] < healthMap[positions[i]]) {
+                            st.pop();
+                            healthMap[positions[i]]--;
+                            i--;
+                        } else {
+                            healthMap[st.top()]--;
+                        }
+                    }
+                }
+            } else {
+                st.push(positions[i]);
+            }
+            i++;
+        }
+
+        vector<int> res;
+        unordered_set<int> s;
+        while(!st.empty()) {
+            s.push(st.top());
+            st.pop();
+        }
+
+        for(int i = 0; i < temp.size(); i++) {
+            if(s.find(temp[i]) != s.end()) {
+                res.push_back(healthMap[temp[i]]);
+            }
+        }
+
+        return res;
+    }
+};

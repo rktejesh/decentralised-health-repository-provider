@@ -59,6 +59,8 @@ app.use('/registerInsurer', registerInsurer);
 app.use('/registerPharmacy', registerPharmacy);
 app.use('/registerResearcher', registerResearcher);
 app.use('/assignDoctor', assignDoctor);
+app.use('/generateEHR', generateEHR);
+app.use('/fetchUsersFromDatabase', fetchUsersFromDatabase);
 
 app.use('/readPatientDocuments', readPatientDocuments);
 
@@ -67,9 +69,7 @@ app.use('/addEmergencyContact', addEmergencyContact);
 app.use('/createAppointment', createAppointment);
 app.use('/deleteAsset', deleteAsset);
 app.use('/fetchFileFromDatabase', fetchFileFromDatabase);
-app.use('/fetchUsersFromDatabase', fetchUsersFromDatabase);
 app.use('/generateBill', generateBill);
-app.use('/generateEHR', generateEHR);
 app.use('/generateLabRecord', generateLabRecord);
 app.use('/generateMedicineReceipt', generateMedicineReceipt);
 app.use('/getGenericData', getGenericData);

@@ -63,5 +63,6 @@ export default {
   "00094": "Error saving user details",
   "00095": "You have successfully signed in.",
   "00096": "The user is not logged in with ethereum wallet.",
-  "00097": "The user is already registered."
+  "00097": "The user is already registered.",
+  "00098": "Please include type of user"
 };

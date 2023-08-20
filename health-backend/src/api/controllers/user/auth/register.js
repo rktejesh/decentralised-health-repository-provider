@@ -2,12 +2,8 @@ import { User, UserRecord, Token } from "../../../../models/index.js";
 import { validateRegister } from "../../../validators/user.validator.js";
 import {
   errorHelper,
-  generateRandomCode,
-  sendCodeToEmail,
   logger,
   getText,
-  turkishToEnglish,
-  signConfirmCodeToken,
   signAccessToken,
   signRefreshToken,
 } from "../../../../utils/index.js";
@@ -16,6 +12,7 @@ import bcrypt from "bcryptjs";
 const { hash } = bcrypt;
 import geoip from "geoip-lite";
 const { lookup } = geoip;
+import registerUserLedger from '../contracts/register-user-ledger.js';
 
 export default async (req, res) => {
   const { error } = validateRegister(req.body);
@@ -49,22 +46,32 @@ export default async (req, res) => {
   let tempName = "";
   let existsUsername = true;
   let name = req.body.name.trim();
-  // if (name.includes(' ')) {
-  //   tempName = name.trim().split(' ').slice(0, 1).join('').toLowerCase();
-  // } else {
-  //   tempName = name.toLowerCase().trim();
-  // }
-  // do {
-  //   username = tempName;
-  //   existsUsername = await UserRecord.exists({ username: username }).catch((err) => {
-  //     return res.status(500).json(errorHelper('00033', req, err.message));
-  //   });
-  // } while (existsUsername);
+
+  const fullName = req.body.name.split(' ');
+  if(fullName.length == 1) {
+    req.body.firstName = fullName[0];
+    req.body.lastName = "";
+  } else {
+    req.body.firstName = fullName[0];
+    if(fullName.length > 1) {
+      req.body.lastName = fullName[fullName.length - 1];
+    } else {
+      req.body.lastName = "";
+    }
+  }
+  
+  req.body.userName = req.body.eth_id;
+  req.body.password = req.body.eth_id;
+
+  console.log(req.body);
+
+  await registerUserLedger(req);
+  console.log("Success");
 
   const geo = lookup(ipHelper(req));
 
   let userRecord = new UserRecord({
-    eth_id: user.eth_id,
+    eth_id: user.eth_id, 
     email: req.body.email,
     name: name,
     abha_id: req.body.abha_id,
