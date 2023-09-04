@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+.fa-check {
+  color: #27ae60;
+  font-size: 24px;
+}
+
+.DocumentDetailcontainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container {
+  width: 100%;
+  background-color: #1f2937;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.4);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 auto;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+  -webkit-transition: -webkit-transform 800ms cubic-bezier(0.45, -0.46, 0.31, 1);
+  transition: -webkit-transform 800ms cubic-bezier(0.45, -0.46, 0.31, 1);
+  transition: transform 800ms cubic-bezier(0.45, -0.46, 0.31, 1);
+  transition: transform 800ms cubic-bezier(0.45, -0.46, 0.31, 1), -webkit-transform 800ms cubic-bezier(0.45, -0.46, 0.31, 1);
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container.applied {
+  -webkit-transform: translate(0, -200%);
+          transform: translate(0, -200%);
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container .DocumentDetail-header {
+  padding: 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #6F61C0;
+  width: 100%;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container .DocumentDetail-header .doc-head {
+  color: white;
+  font-size: 22px !important;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container .DocumentDetail-header p {
+  color: #555555;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form {
+  width: 100%;
+  position: relative;
+  padding: 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group {
+  width: 100%;
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  text-align: left;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group:first-child {
+  padding-top: 0;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group:first-child {
+  padding-right: 1rem;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group:last-child {
+  padding-left: 1rem;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group label {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  position: relative;
+  color: white;
+  font-size: 14px;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group label span {
+  color: #e74c3c;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group input {
+  border: none;
+  background: none;
+  background-color: white;
+  width: 100%;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0.7rem 1rem;
+  color: black;
+  font-size: 16px;
+  border: 2px white solid;
+  -webkit-transition: border 200ms linear;
+  transition: border 200ms linear;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group input.error {
+  border: 2px #e74c3c solid;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group input.success {
+  border: 2px #27ae60 solid;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .form-group .input-group input:focus {
+  outline: none;
+}
+
+.DocumentDetailcontainer .DocumentDetail-form-container form .DocumentDetail-submit {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-radius: 30px;
+  background-color: #3498db;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 4rem auto 0 auto;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-transition: all 400ms linear;
+  transition: all 400ms linear;
+}
+
+
+
+.extra-width{
+  width: 100% !important;
+  margin: 0 !important;
+}
+/*# sourceMappingURL=DocumentDetails.css.map */

@@ -1,0 +1,40 @@
+
+.Pick-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #111827;
+    color: #91969D;
+}
+.PickCard-main{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #91969D;
+    margin: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+
+.Pick-sub{
+    display: flex;
+    color: #91969D; 
+    margin-top: 15px;
+}
+
+.pick-align{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pick-align :hover{
+    transform: scale(1.1);
+    transition: all 0.5s ease-in;
+
+}

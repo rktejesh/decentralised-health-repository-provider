@@ -1,0 +1,63 @@
+.DocumentTable{
+    width: 70%;
+}
+.TableHeading_main{
+    display: flex;
+    justify-content:space-between; 
+    align-items: center;
+    width: 100%;
+    background-color: #374151;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 40px;
+}
+.heading_name{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 12px;
+    color: #91969D;
+    padding-left: 15px;
+}
+.heading_name_1{
+    width: 32%;
+}
+.heading_name_2{
+    width: 32%;
+}
+.heading_name_3{
+    width: 20%;
+}
+.heading_name_4{
+    width: 16%;
+}
+.TableHeading_main2{
+    display: flex;
+    justify-content:space-between; 
+    align-items: center;
+    width: 100%;
+    height: 57px;
+    background-color: #1F2937;
+    border-bottom: 1px solid #91969D;
+    /* border-bottom-color: currentColor; */
+    border-bottom-style: outset;
+}
+.TableHeading_main2_last{
+    display: flex;
+    justify-content:space-between; 
+    align-items: center;
+    width: 100%;
+    height: 57px;
+    background-color: #1F2937;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.requestaccess-btn{
+    padding: 5px;
+    border: none;
+    background-color: #6F61C0;
+    border-radius: 5px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+  }

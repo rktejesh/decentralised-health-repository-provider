@@ -1,0 +1,53 @@
+.Filter-main{
+    display: flex;
+    flex-direction: column;
+}
+.search-form {
+    width: 270px;
+    height: 40px;
+    border-radius: 40px;
+    background: #374151;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  
+  .search-input {
+    font-size: 14px;
+    background: none;
+    color: #91969D;
+    width: 195px;
+    height: 20px;
+    border: none;
+    appearance: none;
+    outline: none; 
+    margin-left: 15px;
+}
+.search-input::placeholder{
+  color: #91969D;
+}
+
+.search-icon{
+  color: #91969D;
+}
+
+.DatePicker{
+  color: #91969D ;
+  border-color: #91969D;
+}
+.DatePicker input{
+  color: #91969D  !important;
+  border-color: #91969D  !important ;
+}
+.DatePicker input::placeholder{
+  color: #91969D !important;
+  border-color: #91969D !important;
+}
+
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
