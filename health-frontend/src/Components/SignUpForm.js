@@ -94,6 +94,7 @@ function SignUpForm({typeOfUser}) {
       })
       .then((res) => {
         if (res) {
+          console.log('akjskjdksdj');
           const accessToken = res.data.accessToken ;
           setAuth({Username,AbhaId,email,accessToken});
           navigate("/Patient/Home");
