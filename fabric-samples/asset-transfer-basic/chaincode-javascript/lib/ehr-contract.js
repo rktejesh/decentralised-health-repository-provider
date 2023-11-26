@@ -5,8 +5,8 @@
 'use strict';
 
 const {Contract} = require('fabric-contract-api');
-const path = require('path')
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 
 //import the files which contains the constructors and auxiliary function
 let Doctor = require('./doctor.js');
@@ -305,8 +305,9 @@ class EhrContract extends Contract {
             let patientsAttended = doctor.patientsAttended;
             index = patientsAttended.indexOf(args.patientId);
 
-            if (index < 0)
+            if (index < 0) {
                 patientsAttended.push(args.patientId);
+            }
             doctor.patientsAttended = patientsAttended;
             await ctx.stub.putState(doctor.medicalRegistrationNo, Buffer.from(JSON.stringify(doctor)));
             console.log('***********3*********');
@@ -326,11 +327,11 @@ class EhrContract extends Contract {
                 await ctx.stub.putState(laboratory.registrationId, Buffer.from(JSON.stringify(laboratory)));
             }
             console.log('*********9************');
-            let response = `an EHR is created with id${newEHR.ehrId} and stored in the world state`;
+            let response = 'an EHR is created with id${newEHR.ehrId} and stored in the world state';
             return response;
 
         } else {
-            throw new Error(`Either the hospital, patient, doctor or the appointment id is wrong`);
+            throw new Error('Either the hospital, patient, doctor or the appointment id is wrong');
         }
     }
 
@@ -378,11 +379,11 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(laboratory.registrationId, Buffer.from(JSON.stringify(laboratory)));
 
-            let response = `LabRecord has been generated with id ${newLabRecord.labRecordId} and updated for both the patient`;
+            let response = 'LabRecord has been generated with id ${newLabRecord.labRecordId} and updated for both the patient';
             return response;
 
         }
-        throw new Error(`Either the patient or hospital entity is not correct`);
+        throw new Error('Either the patient or hospital entity is not correct');
     }
 
     /**
@@ -429,11 +430,11 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(pharmacy.registrationId, Buffer.from(JSON.stringify(pharmacy)));
 
-            let response = `medicineReceipt has been generated with id ${newMedicineReceipt.medicineReceiptId} and updated for both the patient`;
+            let response = 'medicineReceipt has been generated with id ${newMedicineReceipt.medicineReceiptId} and updated for both the patient';
             return response;
 
         }
-        throw new Error(`Either the patient or hospital entity is not correct`);
+        throw new Error('Either the patient or hospital entity is not correct');
     }
 
     /**
@@ -460,10 +461,10 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(patient.userName, Buffer.from(JSON.stringify(patient)));
 
-            let response = `the request to access the documents has been submitted with the patient`;
+            let response = 'the request to access the documents has been submitted with the patient';
             return response;
         } else {
-            throw new Error(`this requester with id ${args.requesterId} or the patient with id ${args.patientId} doesn't exist`);
+            throw new Error('this requester with id ${args.requesterId} or the patient with id ${args.patientId} doesnt exist');
         }
     }
 
@@ -503,13 +504,13 @@ class EhrContract extends Contract {
                 requester.patients = patients;
                 await ctx.stub.putState(args.requesterId, Buffer.from(JSON.stringify(requester)));
 
-                let response = `Access has been provided to the requester with the id ${args.requesterId}`;
+                let response = 'Access has been provided to the requester with the id ${args.requesterId}';
                 return response;
             } else {
-                throw new Error(`No such requester with id ${args.requesterId}`);
+                throw new Error('No such requester with id ${args.requesterId}');
             }
         } else {
-            throw new Error(`patient with id ${args.patientId} or requester with id ${args.requesterId} doesn't exists`);
+            throw new Error('patient with id ${args.patientId} or requester with id ${args.requesterId} doesnt exists');
         }
     }
 
@@ -545,9 +546,9 @@ class EhrContract extends Contract {
     //         requester.patients = patients;
     //         await ctx.stub.putState(args.requesterId, Buffer.from(JSON.stringify(requester)));
 
-    //         return `Access has been provided to the requester with the id ${args.requesterId}`;
+    //         return 'Access has been provided to the requester with the id ${args.requesterId}';
     //     } else {
-    //         throw new Error(`patient with id ${args.patientId} or requester with id ${args.requesterId} doesn't exists`);
+    //         throw new Error('patient with id ${args.patientId} or requester with id ${args.requesterId} doesnt exists');
     //     }
     // }
 
@@ -583,9 +584,9 @@ class EhrContract extends Contract {
             requester.patients = patients;
             await ctx.stub.putState(args.requesterId, Buffer.from(JSON.stringify(requester)));
 
-            return `Access has been provided to the requester with the id ${args.requesterId}`;
+            return 'Access has been provided to the requester with the id ${args.requesterId}';
         } else {
-            throw new Error(`patient with id ${args.patientId} or requester with id ${args.requesterId} doesn't exists`);
+            throw new Error('patient with id ${args.patientId} or requester with id ${args.requesterId} doesnt exists');
         }
     }
 
@@ -621,13 +622,13 @@ class EhrContract extends Contract {
                     await ctx.stub.putState(args.requesterId, Buffer.from(JSON.stringify(requester)));
                 }
 
-                let response = `Access has been revoked for the requester with the id ${args.requesterId}`;
+                let response = 'Access has been revoked for the requester with the id ${args.requesterId}';
                 return response;
             } else {
-                throw new Error(`No such Permissioned id with id ${args.requesterId}`);
+                throw new Error('No such Permissioned id with id ${args.requesterId}');
             }
         } else {
-            throw new Error(`patient with id ${args.patientId} or requester with id ${args.requesterId} doesn't exists`);
+            throw new Error('patient with id ${args.patientId} or requester with id ${args.requesterId} doesnt exists');
         }
     }
 
@@ -714,11 +715,11 @@ class EhrContract extends Contract {
                     if (index > -1) {
                         return await this.modifyAssetInfo(ctx, args);
                     } else {
-                        throw new Error(`asset not found`);
+                        throw new Error('asset not found');
                     }
                 }
             } else {
-                throw new Error(`the asset ${args.assetId} is not part of the hospital list`);
+                throw new Error('the asset ${args.assetId} is not part of the hospital list');
             }
         }
     }
@@ -753,11 +754,11 @@ class EhrContract extends Contract {
                     if (index > -1) {
                         return await this.modifyAssetInfo(ctx, args);
                     } else {
-                        throw new Error(`asset not found`);
+                        throw new Error('asset not found');
                     }
                 }
             } else {
-                throw new Error(`asset with id ${args.assetId} doesn't exist for the doctor`);
+                throw new Error('asset with id ${args.assetId} doesnt exist for the doctor');
             }
         }
     }
@@ -792,14 +793,14 @@ class EhrContract extends Contract {
                     if (index > -1) {
                         return await this.modifyAssetInfo(ctx, args);
                     } else {
-                        throw new Error(`asset not found`);
+                        throw new Error('asset not found');
                     }
                 }
             }
 
 
         } else {
-            throw new Error(`asset with id ${args.assetId} doesn't exist for the pharmacy`);
+            throw new Error('asset with id ${args.assetId} doesnt exist for the pharmacy');
         }
     }
 
@@ -841,11 +842,11 @@ class EhrContract extends Contract {
                 if (index > -1) {
                     return await this.modifyAssetInfo(ctx, args);
                 } else {
-                    throw new Error(`asset not found`);
+                    throw new Error('asset not found');
                 }
             }
         } else {
-            throw new Error(`patient with ide ${args.patientId} doesn't exist`);
+            throw new Error('patient with ide ${args.patientId} doesnt exist');
         }
     }
 
@@ -879,12 +880,12 @@ class EhrContract extends Contract {
                     if (index > -1) {
                         return await this.modifyAssetInfo(ctx, args);
                     } else {
-                        throw new Error(`asset not found`);
+                        throw new Error('asset not found');
                     }
                 }
 
             } else {
-                throw new Error(`asset with id ${args.assetId} doesn't exist for the laboratory`);
+                throw new Error('asset with id ${args.assetId} doesnt exist for the laboratory');
             }
         }
     }
@@ -907,10 +908,10 @@ class EhrContract extends Contract {
                 if (index > -1) {
                     return await this.readDocuments(ctx, args.assetId, researcher.registrationId);
                 } else {
-                    throw new Error(`asset not found`);
+                    throw new Error('asset not found');
                 }
             } else {
-                throw new Error(`asset ${args.assetId} doesn't exits`);
+                throw new Error('asset ${args.assetId} doesnt exits');
             }
         }
     }
@@ -933,10 +934,10 @@ class EhrContract extends Contract {
                 if (index > -1) {
                     return await this.readDocuments(ctx, args.assetId, insurer.registrationId);
                 } else {
-                    throw new Error(`asset not found`);
+                    throw new Error('asset not found');
                 }
             } else {
-                throw new Error(`asset ${args.assetId} doesn't exits`);
+                throw new Error('asset ${args.assetId} doesnt exits');
             }
         }
     }
@@ -988,7 +989,7 @@ class EhrContract extends Contract {
             delete asset.password;
             return asset;
         } else {
-            throw new Error(`the asset with id ${args.id} doesn't exist`);
+            throw new Error('the asset with id ${args.id} doesnt exist');
         }
     }
 
@@ -1006,7 +1007,7 @@ class EhrContract extends Contract {
             let asset = JSON.parse(assetAsBytes);
             return asset.password === args.password;
         } else {
-            throw new Error(`the id ${args.id} doesn't exist`);
+            throw new Error('the id ${args.id} doesnt exist');
         }
     }
 
@@ -1014,7 +1015,7 @@ class EhrContract extends Contract {
         args = await JSON.parse(args);
         const exists = await this.assetExists(ctx, args.id);
         if (!exists) {
-            throw new Error(`The ehr ${args.id} does not exist`);
+            throw new Error('The ehr ${args.id} does not exist');
         }
         await ctx.stub.putState(args.id, Buffer.from(JSON.stringify(args)));
     }
@@ -1055,10 +1056,10 @@ class EhrContract extends Contract {
             //put the hospital in the global state
             await ctx.stub.putState(newHospital.registrationId, Buffer.from(JSON.stringify(newHospital)));
 
-            let response = `Hospital with registrationId ${newHospital.registrationId} is updated in the world state`;
+            let response = 'Hospital with registrationId ${newHospital.registrationId} is updated in the world state';
             return response;
         } else {
-            throw new Error(`hospital with id ${args.hospitalId} already exists`);
+            throw new Error('hospital with id ${args.hospitalId} already exists');
         }
     }
 
@@ -1108,11 +1109,11 @@ class EhrContract extends Contract {
             hospital.bills = bills;
             await ctx.stub.putState(args.hospitalId, Buffer.from(JSON.stringify(hospital)));
 
-            let response = `Bill has been generated with id ${newBill.billId} and updated for both the patient and hospital`;
+            let response = 'Bill has been generated with id ${newBill.billId} and updated for both the patient and hospital';
             return response;
 
         } else {
-            throw new Error(`Either the patient or hospital entity is not correct`);
+            throw new Error('Either the patient or hospital entity is not correct');
         }
     }
 
@@ -1134,10 +1135,10 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(newInsurer.registrationId, Buffer.from(JSON.stringify(newInsurer)));
 
-            let response = `a new insurer created with id ${newInsurer.registrationId} `;
+            let response = 'a new insurer created with id ${newInsurer.registrationId} ';
             return response;
         } else {
-            throw new Error(`Insurer with id ${args.registrationId} already exists`);
+            throw new Error('Insurer with id ${args.registrationId} already exists');
         }
 
     }
@@ -1173,10 +1174,10 @@ class EhrContract extends Contract {
             hospital.laboratories = laboratories;
             await ctx.stub.putState(args.hospitalId, Buffer.from(JSON.stringify(hospital)));
 
-            let response = `the laboratory with id ${newLaboratory.registrationId} has been updated in the world state`;
+            let response = 'the laboratory with id ${newLaboratory.registrationId} has been updated in the world state';
             return response;
         } else {
-            throw new Error(`No such hospital exists or laboratory with id ${args.registrationId} already exists`);
+            throw new Error('No such hospital exists or laboratory with id ${args.registrationId} already exists');
         }
     }
 
@@ -1198,10 +1199,10 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(newResearcher.registrationId, Buffer.from(JSON.stringify(newResearcher)));
 
-            let response = `a new researcher created with id ${newResearcher.userName} `;
+            let response = 'a new researcher created with id ${newResearcher.userName} ';
             return response;
         } else {
-            throw new Error(`Researcher with the Id ${args.registrationId} already exists`);
+            throw new Error('Researcher with the Id ${args.registrationId} already exists');
         }
     }
 
@@ -1235,10 +1236,10 @@ class EhrContract extends Contract {
             hospital.pharmacies = pharmacies;
             await ctx.stub.putState(args.hospitalId, Buffer.from(JSON.stringify(hospital)));
 
-            let response = `the pharmacy with id ${newPharmacy.registrationId} has been updated in the world state`;
+            let response = 'the pharmacy with id ${newPharmacy.registrationId} has been updated in the world state';
             return response;
         } else {
-            throw new Error(`No such hospital exists or the pharmacy with id ${args.registrationId} already exists`);
+            throw new Error('No such hospital exists or the pharmacy with id ${args.registrationId} already exists');
         }
     }
 
@@ -1278,11 +1279,11 @@ class EhrContract extends Contract {
             //put the doctor in the global state
             await ctx.stub.putState(newDoctor.medicalRegistrationNo, Buffer.from(JSON.stringify(newDoctor)));
 
-            let response = `Doctor with medicalRegistrationNo ${newDoctor.medicalRegistrationNo} is updated in the world state`;
+            let response = 'Doctor with medicalRegistrationNo ${newDoctor.medicalRegistrationNo} is updated in the world state';
             return response;
 
         } else {
-            throw new Error(`There is no such hospital with id ${args.hospitalId} or a doctor with id ${args.medicalRegistrationNo} already exists`);
+            throw new Error('There is no such hospital with id ${args.hospitalId} or a doctor with id ${args.medicalRegistrationNo} already exists');
         }
 
     }
@@ -1319,10 +1320,10 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(newPatient.userName, Buffer.from(JSON.stringify(newPatient)));
 
-            let response = `Patient with username ${newPatient.userName} is updated in the world state`;
+            let response = 'Patient with username ${newPatient.userName} is updated in the world state';
             return response;
         } else {
-            throw new Error(`Patient with username ${args.userName} already exists`);
+            throw new Error('Patient with username ${args.userName} already exists');
         }
 
     }
@@ -1367,11 +1368,11 @@ class EhrContract extends Contract {
 
             await ctx.stub.putState(newAppointment.appointmentId, Buffer.from(JSON.stringify(newAppointment)));
 
-            let response = `Appointment with the appointmentId ${newAppointment.appointmentId} is updated in the global state`;
+            let response = 'Appointment with the appointmentId ${newAppointment.appointmentId} is updated in the global state';
             return response;
 
         } else {
-            throw new Error(`Either the hospital id ${args.hospitalId} or the patient Id ${args.userName}is not correct`)
+            throw new Error('Either the hospital id ${args.hospitalId} or the patient Id ${args.userName}is not correct');
         }
     }
 
@@ -1418,11 +1419,11 @@ class EhrContract extends Contract {
             hospital.remainingPatientBills.push(appointment.patientId);
             await ctx.stub.putState(hospital.registrationId, Buffer.from(JSON.stringify(hospital)));
 
-            let response = `Appointment with the appointmentId ${appointment.appointmentId} is assigned a doctor with id ${doctor.medicalRegistrationNo}`;
+            let response = 'Appointment with the appointmentId ${appointment.appointmentId} is assigned a doctor with id ${doctor.medicalRegistrationNo}';
             return response;
 
         } else {
-            throw new Error(`Doctor or appointment with ids ${args.doctorId} or ${args.appointmentId} doesn't exist`);
+            throw new Error('Doctor or appointment with ids ${args.doctorId} or ${args.appointmentId} doesnt exist');
         }
     }
 
@@ -1445,10 +1446,10 @@ class EhrContract extends Contract {
             patient.emergencyContacts = emergencyContacts;
             await ctx.stub.putState(patient.userName, Buffer.from(JSON.stringify(patient)));
 
-            let response = `the emergency contact ${args.contactId} is updated for the patient ${patient.userName}`;
+            let response = 'the emergency contact ${args.contactId} is updated for the patient ${patient.userName}';
             return response;
         } else {
-            throw new Error(`either the patient id ${args.patientId} or the contact id ${args.contactId} doesn't exist`);
+            throw new Error('either the patient id ${args.patientId} or the contact id ${args.contactId} doesnt exist');
         }
     }
 
@@ -1473,10 +1474,10 @@ class EhrContract extends Contract {
                 await ctx.stub.putState(patient.userName, Buffer.from(JSON.stringify(patient)));
             }
 
-            let response = `the emergency contact ${args.contactId} is deleted for the patient ${patient.userName}`;
+            let response = 'the emergency contact ${args.contactId} is deleted for the patient ${patient.userName}';
             return response;
         } else {
-            throw new Error(`the patient id ${args.patientId}  doesn't exist`);
+            throw new Error('the patient id ${args.patientId}  doesnt exist');
         }
     }
 
@@ -1547,9 +1548,9 @@ class EhrContract extends Contract {
         let assetExists = await this.assetExists(ctx, args.assetId);
         if (assetExists) {
             await ctx.stub.deleteState(args.assetId);
-            return `asset with id ${args.assetId} has been deleted`;
+            return 'asset with id ${args.assetId} has been deleted';
         } else {
-            throw new Error(`No such asset with id ${args.assetId}`);
+            throw new Error('No such asset with id ${args.assetId}');
         }
     }
 
@@ -1561,7 +1562,7 @@ class EhrContract extends Contract {
             response = JSON.parse(response);
             return response;
         } else {
-            throw new Error(`No such asset with id ${args.id}`);
+            throw new Error('No such asset with id ${args.id}');
         }
     }
 
@@ -1579,7 +1580,7 @@ class EhrContract extends Contract {
             }
             return false;
         }
-        return "no such patient or requester exists";
+        return 'no such patient or requester exists';
     }
 }
 

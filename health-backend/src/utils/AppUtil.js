@@ -6,12 +6,13 @@
 
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
+import path from 'path';
+import fs from 'fs';
 
-exports.buildCCPOrg1 = () => {
+export const buildCCPOrg1 = () => {
 	// load the common connection configuration file
-	const ccpPath = path.resolve(__dirname, '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+	const ccpPath = path.resolve(process.cwd(), '..',  'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+	console.log(ccpPath);
 	const fileExists = fs.existsSync(ccpPath);
 	if (!fileExists) {
 		throw new Error(`no such file or directory: ${ccpPath}`);
@@ -25,10 +26,10 @@ exports.buildCCPOrg1 = () => {
 	return ccp;
 };
 
-exports.buildCCPOrg2 = () => {
+export const buildCCPOrg2 = () => {
 	// load the common connection configuration file
-	const ccpPath = path.resolve(__dirname, '..', '..', 'fabric-samples', 'test-network',
-		'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+	const ccpPath = path.resolve(process.cwd(), '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org2.example.com', 'connection-org2.json');
+
 	const fileExists = fs.existsSync(ccpPath);
 	if (!fileExists) {
 		throw new Error(`no such file or directory: ${ccpPath}`);
@@ -42,7 +43,7 @@ exports.buildCCPOrg2 = () => {
 	return ccp;
 };
 
-exports.buildWallet = async (Wallets, walletPath) => {
+export const buildWallet = async (Wallets, walletPath) => {
 	// Create a new  wallet : Note that wallet is for managing identities.
 	let wallet;
 	if (walletPath) {
@@ -56,7 +57,31 @@ exports.buildWallet = async (Wallets, walletPath) => {
 	return wallet;
 };
 
-exports.prettyJSONString = (inputString) => {
+export const getContract = async (Wallets, Gateway, userName, walletPath) => {
+	// const walletPath = path.join(process.cwd(), './wallet');
+	const wallet = await Wallets.newFileSystemWallet(walletPath);
+
+	// Create a new gateway for connecting to our peer node.
+	const gateway = new Gateway();
+	const ccpPath = path.resolve(process.cwd(), '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
+	const connectionProfileJson = (await fs.promises.readFile(ccpPath)).toString();
+	const connectionProfile = JSON.parse(connectionProfileJson);
+	console.log(userName);
+	await gateway.connect(connectionProfile, {
+		wallet,
+		identity: userName,
+		discovery: {enabled: true, asLocalhost: true}
+	});
+
+	// Get the network (channel) our contract is deployed to.
+	const network = await gateway.getNetwork('mychannel');
+
+	// Get the contract from the network.
+	const contract = network.getContract('EHRX');
+	return contract;
+};
+
+export const prettyJSONString = (inputString) => {
 	if (inputString) {
 		 return JSON.stringify(JSON.parse(inputString), null, 2);
 	}

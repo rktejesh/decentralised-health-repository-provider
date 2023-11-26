@@ -1,11 +1,13 @@
-import pkg from 'fabric-network';
-const { FileSystemWallet, Gateway, X509WalletMixin } = pkg;
+// import pkg from '@hyperledger/fabric-gateway';
+// const { FileSystemWallet } = pkg;
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fabricnetwork from 'fabric-network';
+const { Gateway, Wallets, X509WalletMixin } = fabricnetwork;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ccpPath = path.resolve(__dirname, '..', '..', '..', '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
 const walletPath = path.join(process.cwd(), './wallet');
-const wallet = new FileSystemWallet(walletPath);
+const wallet = await Wallets.newFileSystemWallet(walletPath);
 
 export default async (req, res) => {
     console.log('******************request body****************');

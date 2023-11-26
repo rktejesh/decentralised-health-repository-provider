@@ -1,6 +1,6 @@
 // const grpc = require('@grpc/grpc-js');
 import grpc from '@grpc/grpc-js';
-import fabric from 'fabric-gateway';
+import fabric from '@hyperledger/fabric-gateway';
 const { connect, Contract, Identity, Signer, signers } = fabric;
 import crypto from 'crypto';
 import path from 'path'
@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 import fs from 'fs/promises';
 const channelName = envOrDefault('CHANNEL_NAME', 'mychannel');
-const chaincodeName = envOrDefault('CHAINCODE_NAME', 'EHR');
+const chaincodeName = envOrDefault('CHAINCODE_NAME', 'EHRX');
 const mspId = envOrDefault('MSP_ID', 'Org1MSP');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -37,6 +37,13 @@ class Connection {
     static gateway;
     async init() {
         await initFabric();
+    }
+
+    constructor() {
+        if (Connection._instance) {
+          return MyClass._instance
+        }
+        Connection._instance = this;
     }
 }
 
