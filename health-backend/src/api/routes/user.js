@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { grantAccess, grantAccessList, appointment, checkUserExists, deleteUser, editUser, forgotPassword, createEHR, getUser, sendOtp, logout, refreshToken, register, sendVerificationCode, verifyEmail, verifyMobile, profile} from '../controllers/user/index.js';
+import { grantAccess, grantAccessList, appointment, checkUserExists, deleteUser, editUser, forgotPassword, createEHR, getUser, sendOtp, logout, refreshToken, register, sendVerificationCode, verifyEmail, verifyMobile, profile, getAppointments} from '../controllers/user/index.js';
 import { auth, imageUpload } from '../middlewares/index.js';
 import temp from '../controllers/user/register-user-ledger-old.js'
 import multer from 'multer';
@@ -20,8 +20,9 @@ router.post('/send-verification-code', sendVerificationCode);
 router.get('/check-user', checkUserExists);
 router.get('/profile', auth, profile);
 // router.post('/createEHR', upload.single('files'), auth, createEHR);
-router.post('/createEHR', auth,createEHR);
+router.post('/createEHR', auth, createEHR);
 router.post('/createAppointment', auth, appointment);
+router.get('/get-appointments', auth, getAppointments)
 router.get('/grant-access-list', grantAccessList)
 router.post('/grant-access', grantAccess)
 

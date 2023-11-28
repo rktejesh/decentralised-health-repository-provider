@@ -1,6 +1,3 @@
-// import pkg from 'fabric-network';
-// const { FileSystemWallet, Gateway, X509WalletMixin } = pkg;
-
 import path from 'path';
 import fs from 'fs';
 import FabricCAServices from 'fabric-ca-client';
@@ -11,11 +8,10 @@ import { buildCAClient, registerAndEnrollUser, enrollAdmin } from '../../../../u
 import { buildCCPOrg1, buildWallet, getContract } from '../../../../utils/AppUtil.js';
 
 const channelName = process.env.CHANNEL_NAME || 'mychannel';
-const chaincodeName = process.env.CHAINCODE_NAME || 'EHR';
+const chaincodeName = process.env.CHAINCODE_NAME || 'EHRX';
 
 const mspOrg1 = 'Org1MSP';
 const walletPath = path.join(process.cwd(), './wallet');
-const ccpPath = path.resolve(process.cwd(), '..', '..', '..', '..', '..', '..', 'fabric-samples', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
 
 export default async (req, res) => {
     const userName = req.body.userName;

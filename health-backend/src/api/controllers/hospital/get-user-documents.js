@@ -27,9 +27,4 @@ export default async (req, res) => {
     });
 
     // logger('00089', req.user._id, getText('en', '00089'), 'Info', req);
-    // return res.status(200).json({
-    //     resultMessage: { en: getText('en', '00089'), tr: getText('tr', '00089') },
-    //     resultCode: '00089',
-    //     user
-    // });
 };

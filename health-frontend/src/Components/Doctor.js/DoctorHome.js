@@ -8,12 +8,14 @@ import Profile from '../Patient/Profile';
 import Requests from './../Patient/Requests';
 import Upload from '../Patient/Upload';
 import Navbar from "../Patient/Navbar"
+import DoctorDocumentTable from './DoctorDocumentTable'
 
 function DoctorHome() {
     const torender = ["Filter", "Profile", "UploadDoc"];
     const axiosPrivate = useAxiosPrivate();
     const [profile, setProfile] = useState("Filter");
     const [userData,setUserData] = useState();
+    const [dummy,setDummy] = useState([]);
     const navigate = useNavigate();
     const handleProfile = (txt) => {
       setProfile(txt);
@@ -22,7 +24,7 @@ function DoctorHome() {
     useEffect(()=>{
       const getUserData = async() =>{
         try{
-           const response = await axiosPrivate.get("/api/Doctor/profile")
+           const response = await axiosPrivate.get("/api/Doctor/profile");
            console.log(response.data);
            setUserData(response.data)
         }
@@ -31,11 +33,24 @@ function DoctorHome() {
           navigate("/Doctor/Login")
         }
       }
+      const fetchData = async() =>{
+        try{
+          const response = await axiosPrivate.get("/api/Doctor/get-user-documents") ;
+          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+          console.log(response.data);
+          setDummy(response.data) ;
+       }
+       catch(err){
+         console.log(err);
+        //  navigate("/Doctor/Login")
+       }
+      }
       getUserData();
-    },[])
+      fetchData();
+    },[dummy])
   return (
     <div className="Home">
-      <Navbar profile={handleProfile} />
+      <Navbar profile={handleProfile} typeemp = {"Doctor"} />
       {torender.map((x) => {
         if (profile === x && profile === "Filter")
           return (
@@ -49,7 +64,6 @@ function DoctorHome() {
           return (
             <div className="UploadModal" id="UploadModal">
               <Upload />
-              
             </div>
           );
         return;

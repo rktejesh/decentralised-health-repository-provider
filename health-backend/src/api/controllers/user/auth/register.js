@@ -33,7 +33,7 @@ export default async (req, res) => {
   });
 
   if (!user) return res.status(400).json(errorHelper("00042", req));
-  // if (!user.isVerified) return res.status(400).json(errorHelper("00044"));
+  if (!user.isVerified) return res.status(400).json(errorHelper("00044"));
 
   const userexists = await UserRecord.findOne({ eth_id: req.body.eth_id })
     .catch((err) => {

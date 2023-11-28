@@ -3,7 +3,7 @@ import React from "react";
 import "../../styles/Navbar.css";
 import profileImg from "../../img/ramanuj.jpg";
 import { NavLink } from "react-router-dom";
-function NavbarMain({profile}) {
+function NavbarMain({profile , typeemp }) {
   const profile_drop = ()=>{
      const v = document.getElementById("profile_drop");
      v.classList.toggle("make_visible");
@@ -26,25 +26,37 @@ function NavbarMain({profile}) {
         <NavLink style={{ textDecoration: "none" }} onClick={() => DisplayComponentsofNavbar("Filter")}>
           <div className="Nav_link_sub">Home</div>
         </NavLink>
-        <NavLink style={{ textDecoration: "none" }}  onClick={() => DisplayComponentsofNavbar("Appointment")}>
-          <div className="Nav_link_sub">Appointment</div>
-        </NavLink>
+        {typeemp=="Patient" ? <NavLink style={{ textDecoration: "none" }}  onClick={() => DisplayComponentsofNavbar("Appointment")}>
+          <div className="Nav_link_sub">Book Appointment</div>
+        </NavLink> : <></>}
         <NavLink style={{ textDecoration: "none" }} onClick={() => DisplayComponentsofNavbar("Requests")}>
           <div className="Nav_link_sub"  >Requests <div className="request_notification">1</div></div>
-          
+        </NavLink>
+        <NavLink style={{ textDecoration: "none" }} onClick={() => DisplayComponentsofNavbar("AppointmentList")}>
+          <div className="Nav_link_sub"  > Appointments </div>
         </NavLink>
         <NavLink style={{ textDecoration: "none" }} onClick={() => DisplayComponentsofNavbar("Profile")} >
           <div className="Nav_link_sub">Profile</div>
         </NavLink>
+        {typeemp=="Hospital" ?<NavLink style={{ textDecoration: "none" }} onClick={() => DisplayComponentsofNavbar("AssignDoctor")}>
+          <div className="Nav_link_sub">Assign Doctor</div>
+        </NavLink> : <></>}
       </div>
 
       <div className="Nav_profile">
+      <div onClick={() => DisplayComponentsofNavbar("CheckDoc")}>
+         { <NavLink style={{ textDecoration: "none" }}>
+            <div className="Nav_link_sub">
+              <button className="upload_document_btn">Check Document</button>
+            </div>
+          </NavLink> }
+        </div>
         <div onClick={() => DisplayComponentsofNavbar("UploadDoc")}>
-          <NavLink style={{ textDecoration: "none" }}>
+         { typeemp == "Doctor" ?  <NavLink style={{ textDecoration: "none" }}>
             <div className="Nav_link_sub">
               <button className="upload_document_btn">Upload Document</button>
             </div>
-          </NavLink>
+          </NavLink> : <></> }
         </div>
         <div className="profile" onClick={profile_drop}>
           <img className="profileImg" src={profileImg} alt=""></img>

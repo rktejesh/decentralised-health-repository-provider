@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { requestAccess, register, profile } from '../controllers/doctor/index.js';
+import { requestAccess, register, profile, getDoctors, checkAccess, getUserDocuments } from '../controllers/doctor/index.js';
 import { auth, imageUpload } from '../middlewares/index.js';
 import temp from '../controllers/user/register-user-ledger-old.js'
 import multer from 'multer';
 import {upload} from '../../utils/index.js';
+import assignDoctor from '../controllers/hospital/assign-doctor.js';
 
 const router = Router();
 
@@ -18,6 +19,10 @@ router.post('/register', register);
 // router.post('/send-verification-code', sendVerificationCode);
 router.get('/profile', auth, profile);
 router.post('/request-access', requestAccess)
+router.get('/get-doctors', getDoctors);
+router.post('/assign-doctors', auth, assignDoctor);
+router.post('/check-access', auth, checkAccess)
+router.get('/get-user-documents', auth, getUserDocuments);
 
 // router.post('/createEHR', upload.single('files'), auth, createEHR);
 

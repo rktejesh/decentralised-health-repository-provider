@@ -7,7 +7,7 @@ export function signAccessToken(userId) {
     { _id: userId },
     jwtSecretKey,
     {
-      expiresIn: '5m',
+      expiresIn: '10d',
     }
   );
   return accessToken;

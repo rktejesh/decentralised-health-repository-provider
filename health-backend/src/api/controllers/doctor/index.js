@@ -1,3 +1,6 @@
 export { default as register } from './auth/register.js'
 export { default as profile } from './profile.js'
 export { default as requestAccess} from './request-access.js'
+export { default as getDoctors } from './get-doctors.js'
+export { default as checkAccess } from './check-access.js'
+export { default as getUserDocuments} from './get-user-documents.js'

@@ -8,9 +8,10 @@ import Profile from '../Patient/Profile';
 import Requests from './../Patient/Requests';
 import Upload from '../Patient/Upload';
 import Navbar from "../Patient/Navbar"
+import AssignDoctor from '../Patient/AssignDoctor';
 
 function HospitalHome() {
-    const torender = ["Filter", "Profile", "UploadDoc"];
+    const torender = ["Filter", "Profile", "UploadDoc" , "AssignDoctor"];
     const axiosPrivate = useAxiosPrivate();
     const [profile, setProfile] = useState("Filter");
     const [userData,setUserData] = useState();
@@ -35,7 +36,7 @@ function HospitalHome() {
     },[])
   return (
     <div className="Home">
-      <Navbar profile={handleProfile} />
+      <Navbar profile={handleProfile} typeemp ={"Hospital"}/>
       {torender.map((x) => {
         if (profile === x && profile === "Filter")
           return (
@@ -44,7 +45,8 @@ function HospitalHome() {
               <DocumentTable />
             </div>
           );
-        if (profile === x && profile === "Profile") return <Profile data = {userData.Hospital} />
+        if (profile === x && profile === "Profile") return <Profile data = {userData.hospital} />
+        if(profile===x && profile === "AssignDoctor") return <AssignDoctor />
         if (profile === x && profile === "UploadDoc")
           return (
             <div className="UploadModal" id="UploadModal">

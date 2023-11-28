@@ -28,9 +28,10 @@ export default async (req, res) => {
 
     let appointment = new Appointment({
         patientId: req.user.eth_id,
-        doctorId: req.body.doctorId,
+        doctorId: "",
         description: req.body.description,
         hospitalId: req.body.hospitalId,
+        time: Date.parse(req.body.date),
         lastLogin: Date.now(),
     });
 
@@ -38,7 +39,7 @@ export default async (req, res) => {
         return res.status(500).json(errorHelper("00034", req, err.message));
     });
 
-    req.body.appointmentId = appointment._id;
+    req.body.appointmentId = appointment._id.toString();
     req.body.userName = req.user.eth_id;
     req.body.patientId = req.user.eth_id;
     console.log(req.body);

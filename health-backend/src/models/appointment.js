@@ -14,6 +14,9 @@ const appointmentSchema = new Schema(
         },
         description: {
             type: String,
+        },
+        time: {
+            type: Date,
         }
     },
     {

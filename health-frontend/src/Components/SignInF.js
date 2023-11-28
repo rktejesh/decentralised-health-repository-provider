@@ -13,9 +13,8 @@ function SignInF({typeOfUser}) {
   const [userexist, setuserexist] = useState();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
-
   const fetchData = async () => {
-    console.log(typeOfUser);
+    console.log("here" + typeOfUser);
     await axiosPrivate
       .get(
         `/api/check-user?eth_id=${walletAddress}&type=${typeOfUser}`

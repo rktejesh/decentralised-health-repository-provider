@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 function DocumentTable() {
   const [dummy,setDummy] = useState([]);
+  const tableh = ["HOSPITAL NAME" ,"DOCTOR NAME","DATE","REPORT","Acess"];
   const navigate = useNavigate();
   useEffect(()=>{
       const fetchData = async() =>{
@@ -24,7 +25,7 @@ function DocumentTable() {
   },[])
   return (
     <div className='DocumentTable'>
-        <TableHeading />
+        <TableHeading tableh = {tableh}/>
         {
               dummy.map((x,index)=>{
                 return dummy.length-1 === index   ? 

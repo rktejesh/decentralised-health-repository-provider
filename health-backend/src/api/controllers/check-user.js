@@ -7,7 +7,7 @@ import geoip from 'geoip-lite';
 const { lookup } = geoip;
 
 export default async (req, res) => {
-  const eth_id = req.query.eth_id;
+  const eth_id = req.query.eth_id.toLowerCase();
   const type = req.query.type;
   const { error } = validateCheckUser(req.query);
   if (error) {
@@ -20,7 +20,7 @@ export default async (req, res) => {
   }
 
 
-  let user = await User.findOne({ eth_id: eth_id }).catch(
+  let user = await User.findOne({ eth_id: eth_id, type : type }).catch(
     (err) => {
       return res.status(500).json(errorHelper("00041", req, err.message));
     }
@@ -43,8 +43,10 @@ export default async (req, res) => {
 
   let exists = false;
 
+  console.log(type);
+
   if (type === "Patient") {
-    let userRecord = await UserRecord.findOne({ eth_id: user.eth_id }).catch(
+    let userRecord = await UserRecord.findOne({ eth_id: eth_id }).catch(
       (err) => {
         return res.status(500).json(errorHelper("00041", req, err.message));
       }
@@ -54,7 +56,7 @@ export default async (req, res) => {
   }
 
   if (type === "Doctor") {
-    let doctorRecord = await DoctorRecord.findOne({ eth_id: user.eth_id }).catch(
+    let doctorRecord = await DoctorRecord.findOne({ eth_id: eth_id }).catch(
       (err) => {
         return res.status(500).json(errorHelper("00041", req, err.message));
       }
@@ -64,13 +66,13 @@ export default async (req, res) => {
   }
 
   if (type === "Hospital") {
-    let hospitalRecord = await HospitalRecord.findOne({ eth_id: user.eth_id }).catch(
+    let hospitalRecord = await HospitalRecord.findOne({ eth_id: eth_id }).catch(
       (err) => {
         return res.status(500).json(errorHelper("00041", req, err.message));
       }
     );
 
-    exists = !hospitalRecord ? false : true;
+    exists = (!hospitalRecord) ? false : true;
   }
 
   const accessToken = signAccessToken(user._id);
@@ -100,6 +102,7 @@ export default async (req, res) => {
     ifUserExists: exists,
     accessToken,
     refreshToken,
+    user
   });
 };
 
